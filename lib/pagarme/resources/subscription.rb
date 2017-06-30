@@ -11,10 +11,6 @@ module PagarMe
     end
 
     # TODO: Test it
-    def postbacks
-      PagarMe::Request.get( url 'postbacks' ).call
-    end
-
     def cancel
       update PagarMe::Request.post( url 'cancel' ).run
     end

@@ -19,6 +19,14 @@ module PagarMe
       super
     end
 
+    def postbacks(id = nil)
+      if id
+        PagarMe::Request.get( url "postbacks/#{id}" ).call
+      else
+        PagarMe::Request.get( url 'postbacks' ).call 
+      end
+    end
+
     private
     def check_card_object
       if card

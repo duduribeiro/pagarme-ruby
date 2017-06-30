@@ -14,10 +14,6 @@ module PagarMe
       PagarMe::Request.get( url 'payables' ).call
     end
 
-    def postbacks
-      PagarMe::Request.get( url 'postbacks' ).call
-    end
-
     def operations
       PagarMe::Request.get( url 'operations' ).call
     end
