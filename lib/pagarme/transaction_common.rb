@@ -19,14 +19,6 @@ module PagarMe
       super
     end
 
-    def postbacks(id = nil)
-      if id
-        PagarMe::Request.get( url "postbacks/#{id}" ).call
-      else
-        PagarMe::Request.get( url 'postbacks' ).call 
-      end
-    end
-
     def redeliver(id)
       update PagarMe::Request.post(url "postbacks/#{id}/redeliver").run
     end
