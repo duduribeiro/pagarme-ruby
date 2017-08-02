@@ -1,4 +1,5 @@
 require_relative '../../test_helper'
+require 'json'
 
 module PagarMe
   class TransactionTest < PagarMeTestCase
@@ -21,6 +22,15 @@ module PagarMe
         assert !PagarMe::Postback.valid_request_signature?(params[:payload], params[:signature][4..-1])
         assert !PagarMe::Postback.valid_request_signature?(params[:payload], 'invalid signature')
       end
+    end
+
+    should 'redeliver a transaction postback' do
+      transaction = PagarMe::Transaction.create transaction_with_customer_with_card_with_postback_params
+      postback = transaction.postbacks.last
+      redeliver = postback.redeliver
+
+      assert_equal redeliver["status"], 'pending_retry'
+
     end
   end
 end
